@@ -144,4 +144,3 @@ jobs:
           docker image prune -f
           
           echo "Deployment completed successfully!"
-
