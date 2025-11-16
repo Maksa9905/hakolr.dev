@@ -1,0 +1,71 @@
+services:
+  frontend:
+    image: ghcr.io/your-username/your-repo-frontend:latest
+    restart: always
+    environment:
+      - NEXT_PUBLIC_API_URL=https://yourdomain.com/api
+      - JWT_SECRET=${FRONTEND_JWT_SECRET}
+    networks:
+      - app-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`yourdomain.com`)"
+
+  backend:
+    image: ghcr.io/your-username/your-repo-backend:latest
+    restart: always
+    environment:
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=hakolr_blog
+      - JWT_SECRET=${BACKEND_JWT_SECRET}
+      - JWT_EXPIRES_IN=3h
+      - ADMIN_LOGIN=hakolr
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - FRONTEND_URL=${FRONTEND_URL}
+      - PORT=3003
+    depends_on:
+      - database
+    networks:
+      - app-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`api.yourdomain.com`)"
+
+  database:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: hakolr_blog
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backups:/backups
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
