@@ -1,0 +1,19 @@
+node_modules
+.git
+.env
+.env.local
+.env.example
+*.log
+test
+coverage
+eslint.config.js
+.eslintrc.js
+.prettierrc
+jest.config.js
+README.md
+Dockerfile
+docker-compose.yml
+.dockerignore
+scripts
+# src папка НЕ исключается - она нужна для serverless функции
+# dist папка НЕ исключается - она нужна для serverless функции 

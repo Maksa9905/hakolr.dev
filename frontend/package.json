@@ -1,0 +1,41 @@
+{
+  "name": "hakolr.dev.frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NEXT_PUBLIC_RENDER_SCAN=true next dev --turbopack",
+    "dev:no-scan": "cross-env NEXT_PUBLIC_RENDER_SCAN=false next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@mdxeditor/editor": "^3.39.1",
+    "@tanstack/react-query": "^5.81.5",
+    "@tanstack/react-query-devtools": "^5.81.5",
+    "axios": "^1.10.0",
+    "effector": "^23.4.1",
+    "effector-react": "^23.3.0",
+    "highlight.js": "^11.11.1",
+    "install": "^0.13.0",
+    "jose": "^6.0.11",
+    "next": "15.3.4",
+    "npm": "^11.4.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "react-responsive": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.4",
+    "typescript": "^5"
+  }
+}

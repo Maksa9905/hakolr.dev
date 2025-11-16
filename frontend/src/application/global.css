@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'Martian Grotesk';
+  src: url('/fonts/MartianGrotesk-StdRg.ttf') format('truetype');
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'Martian Grotesk';
+  src: url('/fonts/MartianGrotesk-StdxBd.ttf') format('truetype');
+  font-weight: 700;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'Martian Grotesk';
+  src: url('/fonts/MartianGrotesk-uWdRg.ttf') format('truetype');
+  font-weight: 400;
+  font-stretch: extra-expanded;
+}
+
+@font-face {
+  font-family: 'Martian Grotesk';
+  src: url('/fonts/MartianGrotesk-uWdUlt.ttf') format('truetype');
+  font-weight: 900;
+  font-stretch: extra-expanded;
+}
+
+@font-face {
+  font-family: 'Martian Mono';
+  src: url('/fonts/MartianMono.ttf') format('truetype');
+  font-stretch: normal;
+}
