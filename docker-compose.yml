@@ -11,7 +11,7 @@ services:
       - NEXT_PUBLIC_API_URL=http://localhost/api
       - JWT_SECRET=${FRONTEND_JWT_SECRET}
     env_file:
-      - ./frontend/.env.local
+      - ./frontend/.env
     networks:
       - app-network
 
