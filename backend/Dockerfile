@@ -14,4 +14,4 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
 EXPOSE 3003
-CMD ["node", "dist/main"]
+CMD ["node", "dist/src/main"]
