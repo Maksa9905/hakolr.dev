@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app/app.module';
+import { createSpecialTags } from '../scripts/create-special-tags';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -32,6 +33,7 @@ async function bootstrap() {
 
   const port = process.env.PORT || 3001;
   await app.listen(port);
+  await createSpecialTags();
 
   console.log(`🚀 Сервер запущен на порту ${port}`);
   console.log(`📚 API доступно по адресу: http://localhost:${port}/api`);

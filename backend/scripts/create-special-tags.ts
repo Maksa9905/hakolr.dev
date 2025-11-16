@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app/app.module';
 import { TagService } from '../src/services/tag.service';
 
-async function createSpecialTags() {
+export async function createSpecialTags() {
   console.log('🏷️  Создание специальных тегов...');
 
   const app = await NestFactory.createApplicationContext(AppModule);
@@ -24,5 +24,3 @@ async function createSpecialTags() {
     await app.close();
   }
 }
-
-createSpecialTags();
