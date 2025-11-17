@@ -35,7 +35,7 @@ export const setAccessTokenMiddleware: MiddlewareFactory = (next) => {
       // Создаем response и сохраняем токен в cookies
       const response = NextResponse.next()
       response.cookies.set('token', token, {
-        httpOnly: true,
+        httpOnly: false,
         secure: false, // Изменится на true когда настроите SSL
         sameSite: 'lax',
         maxAge: 60 * 60 * 24 * 7,
