@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   ValidationPipe,
+  BadRequestException,
 } from '@nestjs/common';
 import { TagService } from '../services/tag.service';
 import { CreateTagDto } from '../dto/create-tag.dto';
@@ -17,6 +18,14 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 @Controller('tags')
 export class TagController {
   constructor(private readonly tagService: TagService) {}
+
+  private validateUUID(id: string): void {
+    const uuidRegex =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(id)) {
+      throw new BadRequestException('Invalid UUID format');
+    }
+  }
 
   @Post()
   @UseGuards(JwtAuthGuard)
@@ -31,6 +40,7 @@ export class TagController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
+    this.validateUUID(id);
     return this.tagService.findOne(id);
   }
 
@@ -40,12 +50,14 @@ export class TagController {
     @Param('id') id: string,
     @Body(ValidationPipe) updateTagDto: UpdateTagDto,
   ) {
+    this.validateUUID(id);
     return this.tagService.update(id, updateTagDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
+    this.validateUUID(id);
     return this.tagService.remove(id);
   }
 }

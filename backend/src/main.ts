@@ -9,29 +9,10 @@ async function bootstrap() {
 
   // Включаем CORS для фронтенда
   app.enableCors({
-    origin: (
-      origin: string,
-      callback: (a: null | Error, b?: boolean) => void,
-    ) => {
-      if (!origin) {
-        return callback(null, true);
-      }
-
-      // Список разрешенных origins
-      const allowedOrigins = [
-        'https://hakolr-dev-frontend.vercel.app',
-        'http://localhost:3000',
-        'http://localhost:3001',
-        process.env.FRONTEND_URL,
-      ].filter(Boolean);
-
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: true, // Разрешаем все origins (за Nginx это безопасно)
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   });
 
   // Глобальная валидация
