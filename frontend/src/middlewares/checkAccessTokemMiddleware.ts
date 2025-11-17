@@ -25,7 +25,7 @@ export const checkAccessTokenMiddleware: MiddlewareFactory = (next) => {
         const response = NextResponse.redirect(new URL('/', request.url))
 
         // Очищаем токен из cookies
-        response.cookies.delete('access')
+        response.cookies.delete('token')
         response.cookies.delete('isAuthorized')
 
         return response

@@ -9,12 +9,28 @@ async function bootstrap() {
 
   // Включаем CORS для фронтенда
   app.enableCors({
-    origin: [
-      'https://hakolr-dev-frontend.vercel.app',
-      'http://localhost:3000',
-      'http://localhost:3001',
-      process.env.FRONTEND_URL || 'http://localhost:3000',
-    ],
+    origin: (
+      origin: string,
+      callback: (a: null | Error, b?: boolean) => void,
+    ) => {
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      // Список разрешенных origins
+      const allowedOrigins = [
+        'https://hakolr-dev-frontend.vercel.app',
+        'http://localhost:3000',
+        'http://localhost:3001',
+        process.env.FRONTEND_URL,
+      ].filter(Boolean);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   });
 
