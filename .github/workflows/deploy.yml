@@ -64,7 +64,7 @@ jobs:
             # Получаем изменения
             echo "📥 Git pull..."
             git fetch origin
-            git reset --hard origin/main
+            git reset --hard origin/master
             
             # Останавливаем контейнеры
             echo "🛑 Остановка контейнеров..."
