@@ -6,18 +6,15 @@ export const databaseConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432'),
-  username: process.env.DB_USERNAME || 'postgres',
+  username: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || '123',
-  database: process.env.DB_DATABASE || 'hakolr_blog',
+  database: process.env.DB_NAME || 'hakolr_blog',
   entities: [Post, Tag],
   synchronize: process.env.TYPEORM_SYNCHRONIZE !== 'false',
   logging:
     process.env.TYPEORM_LOGGING === 'true' ||
     process.env.NODE_ENV !== 'production',
-  ssl:
-    process.env.NODE_ENV === 'production'
-      ? { rejectUnauthorized: false }
-      : false,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
   extra: {
     max: 10,
     min: 2,
