@@ -34,9 +34,11 @@ export const setAccessTokenMiddleware: MiddlewareFactory = (next) => {
 
       // Создаем response и сохраняем токен в cookies
       const response = NextResponse.next()
+      const isProduction = process.env.NODE_ENV === 'production'
+
       response.cookies.set('token', token, {
-        httpOnly: false,
-        secure: false, // Изменится на true когда настроите SSL
+        httpOnly: false, // false чтобы можно было читать в JS
+        secure: isProduction, // true для production (HTTPS)
         sameSite: 'lax',
         maxAge: 60 * 60 * 24 * 7,
         path: '/',
@@ -45,7 +47,7 @@ export const setAccessTokenMiddleware: MiddlewareFactory = (next) => {
       // Сохраняем признак авторизации
       response.cookies.set('isAuthorized', 'true', {
         httpOnly: false, // Доступно в JS
-        secure: false, // Изменится на true когда настроите SSL
+        secure: isProduction, // true для production (HTTPS)
         sameSite: 'lax',
         maxAge: 60 * 60 * 24 * 7,
         path: '/',

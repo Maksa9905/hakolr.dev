@@ -81,3 +81,9 @@ backend/*.pid.lock
 backend/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 .DS_Store
+# SSL certificates
+nginx/ssl/
+certificate.key
+certificate.crt
+certificate_ca.crt
+certificate.csr
