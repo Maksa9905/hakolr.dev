@@ -1,0 +1,19 @@
+# Файлы для добавления в .gitignore для безопасности
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.*.local
+
+# SSL certificates
+nginx/ssl/
+
+# Backups
+*.sql
+*.sql.gz
+backups/
+
+# Docker volumes data
+postgres_data/
+

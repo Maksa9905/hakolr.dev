@@ -1,17 +1,44 @@
-FROM node:18-alpine AS builder
+# Dockerfile для Backend (NestJS)
+FROM node:20-alpine AS builder
 
 WORKDIR /app
+
+# Копируем package.json и package-lock.json
 COPY package*.json ./
+
+# Устанавливаем зависимости
 RUN npm ci
 
+# Копируем весь проект
 COPY . .
+
+# Собираем приложение
 RUN npm run build
 
-FROM node:18-alpine AS runner
-WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+# Production образ
+FROM node:20-alpine
 
-EXPOSE 3003
-CMD ["node", "dist/src/main"]
+WORKDIR /app
+
+# Копируем package.json и package-lock.json
+COPY package*.json ./
+
+# Устанавливаем только production зависимости
+RUN npm ci --only=production && npm cache clean --force
+
+# Копируем собранное приложение из builder
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/scripts ./scripts
+
+# Создаем пользователя без прав root
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nestjs -u 1001
+
+USER nestjs
+
+# Открываем порт
+EXPOSE 3001
+
+# Запускаем приложение
+CMD ["npm", "run", "start:prod"]
+
