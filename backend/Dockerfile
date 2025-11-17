@@ -34,11 +34,14 @@ COPY --from=builder /app/scripts ./scripts
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S nestjs -u 1001
 
+# Меняем владельца файлов
+RUN chown -R nestjs:nodejs /app
+
 USER nestjs
 
 # Открываем порт
 EXPOSE 3001
 
-# Запускаем приложение
-CMD ["npm", "run", "start:prod"]
+# Запускаем приложение напрямую через node
+CMD ["node", "dist/src/main.js"]
 

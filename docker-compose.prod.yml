@@ -1,11 +1,11 @@
-version: '3.8'
-
 services:
   # PostgreSQL Database
   postgres:
     image: postgres:16-alpine
     container_name: hakolr-postgres
     restart: unless-stopped
+    env_file:
+      - .env.production
     environment:
       POSTGRES_DB: ${DB_NAME:-hakolr_blog}
       POSTGRES_USER: ${DB_USER:-postgres}
@@ -30,17 +30,13 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    env_file:
+      - .env.production
     environment:
       NODE_ENV: production
       PORT: 3001
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_NAME: ${DB_NAME:-hakolr_blog}
-      DB_USER: ${DB_USER:-postgres}
-      DB_PASSWORD: ${DB_PASSWORD}
-      JWT_SECRET: ${JWT_SECRET}
-      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
-      FRONTEND_URL: ${FRONTEND_URL}
     networks:
       - hakolr-network
     healthcheck:
@@ -56,11 +52,12 @@ services:
       dockerfile: Dockerfile
     container_name: hakolr-frontend
     restart: unless-stopped
+    env_file:
+      - .env.production
     depends_on:
       - backend
     environment:
       NODE_ENV: production
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     networks:
       - hakolr-network
     healthcheck:
