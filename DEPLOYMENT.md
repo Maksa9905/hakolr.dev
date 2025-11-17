@@ -58,9 +58,9 @@ JWT_SECRET=ваш_jwt_секрет_минимум_32_символа
 TELEGRAM_BOT_TOKEN=ваш_токен_бота
 TELEGRAM_CHAT_ID=ваш_chat_id
 
-# URLs (замените на ваш домен)
-FRONTEND_URL=https://yourdomain.com
-NEXT_PUBLIC_API_URL=https://yourdomain.com/api
+# URLs
+FRONTEND_URL=http://ваш-ip  # или https://yourdomain.com
+NEXT_PUBLIC_API_URL=/api    # используйте относительный путь
 ```
 
 **Генерация безопасных паролей:**
