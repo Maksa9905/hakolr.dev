@@ -18,7 +18,7 @@ const Footer = ({ className }: FooterProps) => {
       <StyledFooter.Link
         $column="2"
         $row="1"
-        href="https://m.vk.com/feed"
+        href="https://vk.com/hakolr"
       >
         <VkIcon />
       </StyledFooter.Link>
@@ -32,7 +32,7 @@ const Footer = ({ className }: FooterProps) => {
       <StyledFooter.Link
         $column="1 / 4"
         $row="2"
-        href="https://music.yandex.ru/users/kuznetsov_dmitriy"
+        href="https://music.yandex.ru/artist/19952022"
       >
         <YaMusicIcon />
       </StyledFooter.Link>
