@@ -8,7 +8,6 @@ export const PublicationContentContainer = styled.section`
   font-weight: 400;
   line-height: 1.5;
 
-
   > * {
     margin-bottom: 16px;
   }
@@ -46,7 +45,7 @@ export const PublicationContentContainer = styled.section`
     padding-left: 20px;
 
     li {
-        line-height: 1.8;
+      line-height: 1.8;
     }
   }
 
@@ -61,7 +60,8 @@ export const PublicationContentContainer = styled.section`
   }
 
   img {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
     margin-right: 16px;
   }
 

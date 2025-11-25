@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NEXT_PUBLIC_RENDER_SCAN=true next dev --turbopack",
-    "dev:no-scan": "cross-env NEXT_PUBLIC_RENDER_SCAN=false next dev --turbopack",
+    "dev": "cross-env NEXT_PUBLIC_RENDER_SCAN=true next dev",
+    "dev:no-scan": "cross-env NEXT_PUBLIC_RENDER_SCAN=false next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
     "@mdxeditor/editor": "^3.39.1",
+    "@next/mdx": "^16.0.3",
     "@tanstack/react-query": "^5.81.5",
     "@tanstack/react-query-devtools": "^5.81.5",
     "axios": "^1.10.0",
@@ -25,6 +28,7 @@
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
     "react-responsive": "^10.0.1",
+    "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "styled-components": "^6.1.19"
   },
@@ -33,6 +37,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/mdx": "^2.0.13",
     "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",

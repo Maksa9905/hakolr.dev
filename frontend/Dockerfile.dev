@@ -1,0 +1,19 @@
+# Dockerfile для Frontend в режиме разработки
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Устанавливаем зависимости для разработки
+COPY package*.json ./
+RUN npm ci
+
+# Копируем весь проект (код будет монтироваться через volume)
+COPY . .
+
+# Открываем порт
+EXPOSE 3000
+
+# В dev режиме запускаем через next dev
+# Команда будет переопределена в docker-compose.dev.yml
+CMD ["npm", "run", "dev"]
+

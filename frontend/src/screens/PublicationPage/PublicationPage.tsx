@@ -17,6 +17,8 @@ const PublicationPage = () => {
     queryFn: () => PublicationsController.getPublication(id as string),
   })
 
+  console.debug(publication)
+
   if (!publication) {
     return null
   }
@@ -28,7 +30,7 @@ const PublicationPage = () => {
         description={publication.description}
       />
       <PageContainer>
-        <PublicationContent content={publication.content} />
+        <PublicationContent content={publication.transformedContent} />
       </PageContainer>
     </>
   )

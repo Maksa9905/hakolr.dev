@@ -81,13 +81,11 @@ export class TelegramService {
       }
 
       case 'password': {
-        const isValid = this.authService.validateUser(session.login!, text);
+        const isValid = this.authService.validateUser(session.login, text);
 
         if (isValid) {
-          const token = await this.authService.generateToken(session.login!);
-          const frontendUrl =
-            process.env.FRONTEND_URL ||
-            'https://hakolr-dev-frontend.vercel.app/editing';
+          const token = await this.authService.generateToken(session.login);
+          const frontendUrl = `${process.env.FRONTEND_URL}/posts`;
           const authUrl = `${frontendUrl}?access=${token}`;
 
           session.step = 'authenticated';

@@ -22,7 +22,6 @@ export {
   titleChanged,
   descriptionChanged,
   previewChanged,
-  contentChanged,
   tagsChanged,
   publicationDataInitialized,
 } from './model/publicationForm'

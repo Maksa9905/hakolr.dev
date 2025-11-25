@@ -7,6 +7,7 @@ import {
   PublicationTagResponse,
 } from './types'
 import { cookies } from '@/shared/lib'
+import { transofrmPublicationResponse } from '../model/mappers'
 
 export class PublicationsController {
   static async getPublicationsTags() {
@@ -36,9 +37,14 @@ export class PublicationsController {
   }
 
   static async getPublication(id: string) {
-    return await ApiController.call<PublicationResponse>(`posts/${id}`, {
-      method: 'GET',
-    })
+    const response = await ApiController.call<PublicationResponse>(
+      `posts/${id}`,
+      {
+        method: 'GET',
+      },
+    )
+
+    return transofrmPublicationResponse(response)
   }
 
   static async updatePublication(id: string, data: CreatePublicationParams) {

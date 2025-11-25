@@ -25,7 +25,8 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "useDefineForClassFields": false,
-    "lib": ["ES2020", "DOM"]
+    "lib": ["ES2020", "DOM"],
+    "types": ["node", "express", "multer"]
   },
   "include": ["src/**/*", "api/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]

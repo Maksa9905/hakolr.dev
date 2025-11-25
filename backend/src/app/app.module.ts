@@ -6,6 +6,7 @@ import { AuthModule } from '../auth/auth.module';
 import { PostModule } from '../modules/post.module';
 import { TagModule } from '../modules/tag.module';
 import { TelegramModule } from '../telegram/telegram.module';
+import { FileModule } from '../modules/file.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TelegramModule } from '../telegram/telegram.module';
     PostModule,
     TagModule,
     TelegramModule,
+    FileModule,
   ],
 })
 export class AppModule {}

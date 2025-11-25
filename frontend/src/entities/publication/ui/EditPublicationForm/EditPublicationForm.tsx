@@ -6,7 +6,6 @@ import {
   EditPublicationFormContainer,
 } from './EditPublicationForm.styled'
 import {
-  $content,
   $description,
   $preview,
   $tags,
@@ -20,12 +19,15 @@ import { useParams } from 'next/navigation'
 import TitleInput from './TitleInput'
 import PreviewInput from './PreviewInput'
 import DescriptionInput from './DescriptionInput'
-import { ContentEditor } from './ContentEditor'
 import TagsSelect from './TagsSelect'
 import { useRouter } from 'next/navigation'
+import { MDXEditorMethods } from '@mdxeditor/editor'
+import ForwardRefEditor from '@/shared/ui/MDXEditor'
 
 export const EditPublicationForm = () => {
   const isInitialized = useRef(false)
+  const contentEditorRef = useRef<MDXEditorMethods>(null)
+
   const router = useRouter()
   const { id } = useParams()
 
@@ -43,9 +45,9 @@ export const EditPublicationForm = () => {
         title: publication.title,
         description: publication.description,
         preview: publication.paragraph,
-        content: publication.content,
         tags: publication.tagIds,
       })
+      contentEditorRef.current?.setMarkdown(publication.content)
       isInitialized.current = true
     }
   }, [publication])
@@ -56,7 +58,7 @@ export const EditPublicationForm = () => {
         title: $title.getState(),
         description: $description.getState(),
         paragraph: $preview.getState(),
-        content: $content.getState(),
+        content: contentEditorRef.current?.getMarkdown() || '',
         tagIds: $tags.getState(),
       })
 
@@ -67,7 +69,7 @@ export const EditPublicationForm = () => {
       title: $title.getState(),
       description: $description.getState(),
       paragraph: $preview.getState(),
-      content: $content.getState(),
+      content: contentEditorRef.current?.getMarkdown() || '',
       tagIds: $tags.getState(),
     })
 
@@ -84,7 +86,11 @@ export const EditPublicationForm = () => {
       <TitleInput />
       <PreviewInput />
       <DescriptionInput />
-      <ContentEditor />
+      <ForwardRefEditor
+        label="Контент"
+        markdown={publication?.content || ''}
+        ref={contentEditorRef}
+      />
       <ButtonsContainer $isNew={isNew}>
         <Button onClick={handleSubmitForm}>
           {isNew ? 'Создать' : 'Изменить'}
