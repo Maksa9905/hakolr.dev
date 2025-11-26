@@ -1,5 +1,5 @@
 import { cookies } from '../lib'
-import { ApiController } from './ApiController'
+import { ApiController, BASE_URL } from './ApiController'
 
 export interface UploadImageResponse {
   success: boolean
@@ -29,7 +29,7 @@ export class FileApi {
       },
     )
 
-    return `${process.env.NEXT_PUBLIC_API_URL}/file/images/${response.id}.jpg`
+    return `${BASE_URL}/file/images/${response.id}.jpg`
   }
 
   /**

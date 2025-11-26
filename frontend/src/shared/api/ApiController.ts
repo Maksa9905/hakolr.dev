@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 // Определяем URL для API запросов
 // На сервере (SSR) используем внутренний Docker URL
 // На клиенте используем относительный путь (через Nginx)
-const BASE_URL =
+export const BASE_URL =
   typeof window === 'undefined'
     ? process.env.NEXT_PUBLIC_API_URL_INTERNAL || 'http://backend:3001/api'
     : process.env.NEXT_PUBLIC_API_URL || '/api'
